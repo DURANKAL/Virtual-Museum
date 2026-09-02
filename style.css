@@ -1,0 +1,480 @@
+body {
+  background-color:  #F1E7D0;
+  color: #2e2118;
+  font-family: 'Georgia', serif;
+   padding: 20px; 
+}
+
+.hero {
+  height: 90vh;
+  background-image: linear-gradient(rgba(59,42,26,0.6), rgba(59,42,26,0.6))            
+  ,url('Interior-National-Gallery-of-Art-Washington-DC.webp') ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #D8C7A5;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+
+  
+  background-size: cover;
+  background-position: center;
+  
+  /* Frame effect */
+  border: 15px solid #2B2118;        /* dark oak outer frame */
+          
+  outline-offset: -25px;             /* pulls the gold line inward, like a mat board edge */
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5), /* inner shadow, like glass/depth */
+              0 10px 25px rgba(0,0,0,0.4);    /* outer shadow, lifts it off the page */
+  box-sizing: border-box;
+  
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color:#F3E3C1;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  margin-bottom: 1rem;
+  color: #f5ecd8;
+
+}
+
+.hero-content {
+  padding: 40px 60px;
+  position: relative;
+  display: inline-block;
+  max-width: 700px;
+}
+
+
+.hero-content::before,
+.hero-content::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #C9B18A;
+}
+
+.hero-content::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hero-content::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 12px 28px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  background-color: #C6A15B;
+  color: #2B2118;
+}
+
+.hero-btn:hover {
+  background: #8f7040;
+}
+
+header {
+  padding: 10px 20px 10px;   /* the last value (30px) adds space below the nav */
+}
+
+nav a {
+  color: #2e2118;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
+  padding: 40px 10x 30px
+}
+
+nav a:hover {
+  color: #b08d57;
+}
+
+footer {
+  background-color: #f1e9d8;
+  color: #3b2a1a;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  border-top: 2px solid #d8c6a1;
+  border-top: 6px double #b08d57;
+}
+
+footer p {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.footer-links a {
+  color: #3b2a1a;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: #b08d57;
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 600px) {
+  .hero {
+    height: auto;
+    padding: 60px 20px;
+  }
+
+  .hero-content {
+    padding: 20px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content nav a {
+    font-size: 0.85rem;
+    margin-left: 10px;
+  }
+}
+
+.hero-btn {
+    position: relative;
+    z-index: 10;
+}
+
+.about {
+  background-color: #f1e9d8;
+  padding: 80px 20px 200px;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.about-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.about-content {
+  max-width: 700px;
+  margin: 0 auto;
+   flex: 1 1 400px;
+}
+
+.about-content h2 {
+  font-size: 2.2rem;
+  color: #3b2a1a;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #2e2118;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.framed-image {
+  display: inline-block;
+  padding: 15px;
+  background: #3b2a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.framed-image img {
+  display: block;
+  height: 370px;
+  width: 100%;
+  max-width: 600px;
+  border: 8px solid #f5ecd8;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  box-sizing: border-box;        
+   
+}
+
+.image-caption {
+  margin-top: 12px;
+  font-style: italic;
+  color: #62503a;
+  font-size: 0.95rem;
+}
+
+.contact {
+  background-color: #f1e9d8;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.contact-container h2 {
+  font-size: 2.2rem;
+  color: #3b2a1a;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.contact-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.contact-details {
+  flex: 1 1 350px;
+  text-align: left;
+
+}
+
+.contact-details p {
+  font-size: 1.1rem;
+  line-height: 1.1;
+  color: #2e2118;
+  margin-bottom: 10px;
+  padding-left: 75px;
+}
+
+.contact-details strong {
+  display: block;
+  color: #b08d57;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  flex: 1 1 100px;
+}
+
+.exhibits {
+  background-color: #f1e9d8;
+  padding: 80px 20px;
+  text-align: center;
+  
+  border: 7px solid #570606; 
+  min-height: 100vh;
+  box-sizing: border-box;
+
+}
+
+.exhibits h2 {
+  font-size: 2.2rem;
+  color: #3b2a1a;
+  margin-bottom: 50px;
+}
+
+.exhibits-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  row-gap: 150px;
+}
+
+.exhibit-card {
+  text-align: center;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.exhibit-card .framed-image {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.exhibit-card:hover .framed-image {
+  transform: rotateY(8deg) rotateX(5deg) scale(1.04);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+}
+
+.exhibit-info h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #3b2a1a;
+}
+
+.exhibit-info p {
+  font-style: italic;
+  color: #62503a;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+@media (max-width: 800px) {
+  .exhibits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .exhibits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.legal {
+  background-color: #f1e9d8;
+  padding: 80px 20px;
+   border: 7px solid #570606; 
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.legal-content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.legal-content h2 {
+  font-size: 2.2rem;
+  color: #3b2a1a;
+  margin-bottom: 10px;
+}
+
+.legal-content h3 {
+  font-size: 1.3rem;
+  color: #3b2a1a;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.legal-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #2e2118;
+  margin-bottom: 15px;
+}
+
+.legal-content a {
+  color: #b08d57;
+  text-decoration: underline;
+}
+
+.exhibits-intro {
+  max-width: 600px;
+  margin: 0 auto 50px;
+  font-size: 1.1rem;
+  color: #62503a;
+  font-style: italic;
+}
+
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  perspective: 1500px
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-overlay.active.open {
+  opacity: 1;
+}
+
+.modal-content {
+  background: #f5ecd8;
+  border: 10px solid #3b2a1a;
+  padding: 40px 40px 30px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  perspective: 800px;
+}
+
+.modal-overlay.active.open .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 400px;
+  margin: 0 auto 20px;
+  border: 8px solid #f5ecd8;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: scale(0.9);
+  animation: revealImage 0.5s ease 0.15s forwards;
+  transition: transform 0.15s ease-out;   /* smooths the tilt movement */
+  transform-style: preserve-3d;
+}
+
+.modal-content h3 {
+  color: #3b2a1a;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: #2e2118;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #3b2a1a;
+  z-index: 10;         /* ensures it always sits above image/text */
+  line-height: 1;
+}
+
+@keyframes revealImage {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
