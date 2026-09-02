@@ -2,6 +2,11 @@
 <head>
   <title>Contact - Virtual Museum</title>
   <meta charset="UTF-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -47,6 +52,35 @@
   </div>
 </div>
 
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+gsap.from('.framed-image', {
+  x: -60,
+  opacity: 0,
+  duration: 1,
+  ease: "power3.out",
+  scrollTrigger: { trigger: '.framed-image', start: "top 80%" }
+});
+
+gsap.from('.about-content p, .contact-details p', {
+  y: 30,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.15,
+  ease: "power3.out",
+  scrollTrigger: { trigger: '.about-content, .contact-details', start: "top 80%" }
+});
+
+gsap.from('footer', {
+  y: 30,
+  opacity: 0,
+  duration: 0.8,
+  ease: "power3.out",
+  scrollTrigger: { trigger: 'footer', start: "top 95%" }
+});
+</script>
+
 </section>
 
 
@@ -59,6 +93,8 @@
        </div>
 
     </footer>
+
+
 
 
 </body>

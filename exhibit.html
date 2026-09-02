@@ -2,6 +2,10 @@
 <head>
   <title>Exhibit - Virtual Museum</title>
   <meta charset="UTF-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -20,6 +24,8 @@
 
 
 <section class="exhibits">
+ 
+  <div class="spotlight"></div>
 
   <h2>Have a look!</h2>
   <p class="exhibits-intro">A curated collection of the world's most iconic paintings, brought together in one virtual gallery.</p>
@@ -144,7 +150,12 @@
     <div class="modal-overlay" id="paintingModal">
   <div class="modal-content">
     <span class="modal-close" id="modalClose">&times;</span>
-    <img id="modalImg" src="" alt="">
+
+
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="">
+    </div>
+
     <h3 id="modalTitle"></h3>
     <p id="modalArtist"></p>
     <p id="modalDesc"></p>
@@ -152,6 +163,26 @@
 </div>
 
     <script>
+  let isModalOpen = false;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray('.exhibit-card').forEach((card) => {
+  gsap.from(card, {
+    y: 60,
+    opacity: 0,
+    duration: 0.9,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%",   // animation begins when card is 85% down the viewport
+      toggleActions: "play none none none"
+    }
+  });
+});
+
+
+
   const cards = document.querySelectorAll('.exhibit-card');
   const modal = document.getElementById('paintingModal');
   const modalImg = document.getElementById('modalImg');
@@ -160,48 +191,118 @@
   const modalDesc = document.getElementById('modalDesc');
   const modalClose = document.getElementById('modalClose');
 
- cards.forEach(card => {
-    card.addEventListener('click', () => {
-      modalImg.src = card.dataset.img;
-      modalTitle.textContent = card.dataset.title;
-      modalArtist.textContent = card.dataset.artist;
-      modalDesc.textContent = card.dataset.desc;
-      
-      modal.classList.add('active');       // switches display: none → flex
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          modal.classList.add('open');     // triggers the actual transition
-        });
-      });
-    });
- });
+
+
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    if (isModalOpen) return; // Prevent multiple opens
+
+    modalImg.src = card.dataset.img;
+    modalTitle.textContent = card.dataset.title;
+    modalArtist.textContent = card.dataset.artist;
+    modalDesc.textContent = card.dataset.desc;
+
+    modal.classList.add('active'); // Show the modal instantly
+    isModalOpen = true;
+  });
+});
+
+
+
 
  const modalImgEl = document.getElementById('modalImg');
+ const modalImgWrap = document.querySelector('.modal-img-wrap');
 
-modalImgEl.addEventListener('mousemove', (e) => {
-  const rect = modalImgEl.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+// gsap.quickTo creates a fast, reusable "setter" — smoother than gsap.to on every mousemove
+const rotateXSetter = gsap.quickTo(modalImgEl, "rotationX", {
+  duration: 0.3,
+  ease: "power2.out"
+});
+const rotateYSetter = gsap.quickTo(modalImgEl, "rotationY", {
+  duration: 0.3,
+  ease: "power2.out"
+});
+const scaleSetter = gsap.quickTo(modalImgEl, "scale", {
+  duration: 0.3,
+  ease: "power2.out"
+});
+
+
+
+
+ modalImgWrap.addEventListener('mousemove', (e) => {
+  const rect = modalImgWrap.getBoundingClientRect();
+  const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+  const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
 
   const centerX = rect.width / 2;
   const centerY = rect.height / 2;
 
-  const rotateX = ((y - centerY) / centerY) * -8;  // tilt strength, adjust as needed
-  const rotateY = ((x - centerX) / centerX) * 8;
+  const rotateX = ((y - centerY) / centerY) * -25;
+  const rotateY = ((x - centerX) / centerX) * 25;
 
-  modalImgEl.style.transform = `scale(1) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  rotateXSetter(rotateX);
+  rotateYSetter(rotateY);
+  scaleSetter(1.02); // Slightly enlarge the image on hover
 });
 
-modalImgEl.addEventListener('mouseleave', () => {
-  modalImgEl.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+modalImgWrap.addEventListener('mouseleave', () => {
+  gsap.to(modalImgEl, {
+    rotationX: 0,
+    rotationY: 0,
+    scale: 1,
+    duration: 0.5,
+    ease: "power3.out"
+  });
 });
 
- function closeModal() {
-  modal.classList.remove('open');
-  setTimeout(() => {
-    modal.classList.remove('active');
-  }, 300);
+gsap.from('#modalTitle, #modalArtist, #modalDesc', {
+  y: 15,
+  opacity: 0,
+  duration: 0.5,
+  stagger: 0.12,
+  delay: 0.4,
+  ease: "power2.out"
+});
+
+gsap.from('footer', {
+  y: 30,
+  opacity: 0,
+  duration: 0.8,
+  ease: "power3.out",
+  scrollTrigger: { trigger: 'footer', start: "top 95%" }
+});
+
+
+const spotlight = document.querySelector('.spotlight');
+const exhibitsSection = document.querySelector('.exhibits');
+
+exhibitsSection.addEventListener('mousemove', (e) => {
+  const rect = exhibitsSection.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+  gsap.to(spotlight, {
+    "--x": `${x}%`,
+    "--y": `${y}%`,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+ 
+
+function closeModal() {
+  modal.classList.remove('active'); // No fade-out animation
+  isModalOpen = false; // Allow new clicks after closing
 }
+
+
+
+
+
+
+
 
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => {

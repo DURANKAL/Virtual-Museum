@@ -2,6 +2,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Museum Website</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,15 +24,13 @@
 
 </header>
 
-
     <section class="hero">
-
-      <div class="hero-content">
+      <div class="hero-bg"></div>
+       <div class="hero-content">
         <h1>Welcome to the virtual Museum</h1>
         <p>Explore history, art and culture.</p>
         <a href="exhibit.html" class="hero-btn">Explore Exhibits</a>
-      </div>
-
+     </div>
     </section>
 
     <footer>
@@ -41,6 +43,44 @@
 
     </footer>
 
+
+</script>
+
+
+<script>
+  const heroHeading = document.querySelector('.hero-content h1');
+  const words = heroHeading.textContent.trim().split(' ');
+  heroHeading.innerHTML = words.map(word => `<span class="word">${word}&nbsp;</span>`).join('');
+
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+   tl.from('.hero-content h1 .word', {
+    y: 40,
+    opacity: 0,
+    duration: 1.1,
+    stagger: 0.22
+  })
+  .from('.hero-content p', {
+    y: 20,
+    opacity: 0,
+    duration: 0.9
+  }, "-=0.5")
+  .from('.hero-btn', {
+    scale: 0.7,
+    opacity: 0,
+    duration: 0.8,
+    ease: "back.out(1.7)"
+  }, "-=0.3");
+
+
+  gsap.from('footer', {
+  y: 30,
+  opacity: 0,
+  duration: 0.8,
+  ease: "power3.out",
+  scrollTrigger: { trigger: 'footer', start: "top 95%" }
+});
+</script>
 
 </body>
 </html>

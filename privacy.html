@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Privacy Policy - Virtual Museum</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,6 +39,16 @@
       <h3>Contact</h3>
       <p>If you have questions about this Privacy Policy, reach out via the details on our <a href="contact.html">Contact page</a>.</p>
     </div>
+
+    <script>
+      gsap.from('footer', {
+      y: 30,
+     opacity: 0,
+     duration: 0.8,
+     ease: "power3.out",
+     scrollTrigger: { trigger: 'footer', start: "top 95%" }
+});
+    </script>
   </section>
 
   <footer>
