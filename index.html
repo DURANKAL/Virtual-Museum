@@ -48,6 +48,7 @@
 
 
 <script>
+  
   const heroHeading = document.querySelector('.hero-content h1');
   const words = heroHeading.textContent.trim().split(' ');
   heroHeading.innerHTML = words.map(word => `<span class="word">${word}&nbsp;</span>`).join('');

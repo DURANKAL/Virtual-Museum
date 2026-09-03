@@ -164,6 +164,7 @@
 
     <script>
   let isModalOpen = false;
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -228,8 +229,7 @@ const scaleSetter = gsap.quickTo(modalImgEl, "scale", {
 });
 
 
-
-
+ if (!isTouchDevice) {
  modalImgWrap.addEventListener('mousemove', (e) => {
   const rect = modalImgWrap.getBoundingClientRect();
   const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
@@ -255,6 +255,8 @@ modalImgWrap.addEventListener('mouseleave', () => {
     ease: "power3.out"
   });
 });
+}
+  
 
 gsap.from('#modalTitle, #modalArtist, #modalDesc', {
   y: 15,
@@ -277,18 +279,22 @@ gsap.from('footer', {
 const spotlight = document.querySelector('.spotlight');
 const exhibitsSection = document.querySelector('.exhibits');
 
-exhibitsSection.addEventListener('mousemove', (e) => {
-  const rect = exhibitsSection.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
+if (isTouchDevice) {
+  spotlight.style.display = 'none'; // no persistent cursor on touch, so hide it
+} else {
+  exhibitsSection.addEventListener('mousemove', (e) => {
+    const rect = exhibitsSection.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-  gsap.to(spotlight, {
-    "--x": `${x}%`,
-    "--y": `${y}%`,
-    duration: 0.3,
-    ease: "power2.out"
+    gsap.to(spotlight, {
+      "--x": `${x}%`,
+      "--y": `${y}%`,
+      duration: 0.3,
+      ease: "power2.out"
+    });
   });
-});
+}
 
  
 
